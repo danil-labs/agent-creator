@@ -1,60 +1,66 @@
-# Crear agentes
+# agent-creator
 
-Cómo declarar agentes en un repositorio para que cualquier persona del equipo,
-con el CLI que tenga, obtenga el mismo criterio de trabajo.
+How to declare agents in a repository so that anyone on the team, with whichever
+coding CLI they use, gets the same working criteria.
 
-Un **agente** es un rol con nombre: quién hace qué trabajo, con qué archivos,
-hasta dónde llega y a quién le pasa el resultado. Vive en un archivo versionado
-y se revisa por pull request, como el código.
+An **agent** is a named role: who does which work, with which files, where it
+stops, and whom it hands the result to. It lives in a versioned file and is
+reviewed by pull request, like code.
 
-## Agente, skill y AGENTS.md no son lo mismo
+This repository is the agent counterpart of the skill-creator repositories: a
+spec, a design guide, a template, a worked example team, a skill that walks a
+coding agent through creating one, and a validator.
 
-| | Qué es | Dónde vive | Ejemplo |
+## Agent, skill and AGENTS.md are not the same thing
+
+| | What it is | Where it lives | Example |
 |---|---|---|---|
-| **`AGENTS.md`** | Las reglas del repositorio. Valen para todos | La raíz del repositorio | "Nada de datos reales de clientes" |
-| **Skill** | Un método: cómo se hace una cosa, paso a paso | `skills/<nombre>/SKILL.md` | Cómo se escribe una historia de usuario |
-| **Agente** | Un rol: quién la hace, con qué criterio y a quién entrega | `.agents/agents/<nombre>/agent.md` | El redactor, que escribe historias y se las pasa al revisor |
+| **`AGENTS.md`** | The repository's rules. They apply to everyone | The repository root | "No real customer data, ever" |
+| **Skill** | A method: how one thing is done, step by step | `skills/<name>/SKILL.md` | How to write a user story |
+| **Agent** | A role: who does it, with which criteria, and whom they hand off to | `.agents/agents/<name>/agent.md` | The story writer, who writes stories and hands them to the reviewer |
 
-El agente no repite el método: carga la skill. Si el método cambia, cambia en la
-skill y todos los agentes que la usan lo reciben.
+The agent does not repeat the method: it loads the skill. When the method
+changes, it changes in the skill, and every agent that uses it gets the change.
 
-## Estructura de este repositorio
+## What is in this repository
 
 ```
-README.md                      este archivo
-ESPECIFICACION.md              el formato: carpeta, frontmatter, nombre, cuerpo, skills propias, memoria
-GUIA.md                        cómo diseñar un agente y un equipo de agentes que no se pisen
-plantilla/agent.md             la plantilla para empezar
-ejemplos/                      un equipo pequeño y completo: productor, revisor y dueño de un artefacto
-skills/crear-agente/SKILL.md   la skill que guía la creación de un agente, paso a paso
-scripts/validar_agente.py      el validador: formato, nombre, secciones, rutas y relevos
+README.md                         this file
+SPEC.md                           the format: folder, frontmatter, name, body, own skills, memory
+GUIDE.md                          how to design one agent, and a team of agents that do not overlap
+template/agent.md                 the template to start from
+examples/                         a small, complete team: a producer, a reviewer and an artifact owner
+skills/create-agent/SKILL.md      the skill that guides the creation of an agent, step by step
+scripts/validate_agent.py         the validator: format, name, sections, paths and handoffs
 ```
 
-## Inicio rápido
+## Quick start
 
-1. Lee [`GUIA.md`](GUIA.md) § 1 para decidir si lo que quieres es un agente o
-   una skill.
-2. Copia [`plantilla/agent.md`](plantilla/agent.md) a
-   `.agents/agents/<nombre>/agent.md` en tu repositorio.
-3. Llénalo siguiendo [`ESPECIFICACION.md`](ESPECIFICACION.md) y la guía.
-4. Valídalo:
+1. Read [`GUIDE.md`](GUIDE.md) § 1 to decide whether what you want is an agent
+   or a skill.
+2. Copy [`template/agent.md`](template/agent.md) to
+   `.agents/agents/<name>/agent.md` in your repository.
+3. Fill it in following [`SPEC.md`](SPEC.md) and the guide.
+4. Validate it (Python 3, standard library only):
 
    ```bash
-   python scripts/validar_agente.py --raiz <tu-repositorio>
+   python scripts/validate_agent.py --root <your-repository>
    ```
 
-5. Pruébalo con un caso real antes de darlo por bueno (`GUIA.md` § 9).
+5. Try it on a real case before calling it done (`GUIDE.md` § 9).
 
-Si trabajas con un agente de código, dale la skill
-[`skills/crear-agente/`](skills/crear-agente/SKILL.md) y pídele el agente: sigue
-el mismo camino y corre el validador al final.
+If you work with a coding agent, give it the
+[`skills/create-agent/`](skills/create-agent/SKILL.md) skill and ask it for the
+agent: it follows the same path and runs the validator at the end.
 
-## De dónde sale
+## Where it comes from
 
-De un equipo que declaró seis agentes para un proyecto real: un líder de
-producto, un redactor y un revisor de historias, un scrum master, un arquitecto
-y un líder técnico. Las reglas de aquí salieron de lo que falló en el camino, y
-cada una dice por qué existe.
+From a team that declared six agents for a real project: a product lead, a story
+writer and a story reviewer, a scrum master, an architect and a tech lead. The
+rules here came out of what failed along the way, and each one says why it
+exists.
 
-El formato es el que lee Terminus, y es compatible con los subagentes de Claude
-Code: Markdown con frontmatter YAML.
+The format is plain Markdown with YAML frontmatter. It is the one
+[Terminus](https://github.com/danil-labs) reads for every CLI it drives, and it
+is compatible with Claude Code subagents. [`SPEC.md`](SPEC.md) § 9 describes
+how a harness is expected to read it.
