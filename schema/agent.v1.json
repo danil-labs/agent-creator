@@ -1,0 +1,235 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/danil-labs/agent-creator/v1/schema/agent.v1.json",
+  "title": "Agent manifest (agent.json), spec version 1",
+  "description": "The optional manifest that sits next to agent.md in .agents/agents/<name>/. The prompt, name and description live in agent.md; this file declares scope, identity, memory, limits and requests. See SPEC.md. Unknown root fields are allowed here because readers must warn about them, not reject them (SPEC § 9.2).",
+  "type": "object",
+  "required": [
+    "specVersion",
+    "scope"
+  ],
+  "properties": {
+    "$schema": {
+      "description": "Informative. Lets editors validate the file. Readers never decide anything from it. Point it to a version tag, not to a branch.",
+      "type": "string",
+      "format": "uri"
+    },
+    "specVersion": {
+      "description": "Major version of the spec this manifest follows. A reader that does not support it does not load the agent.",
+      "type": "integer",
+      "const": 1
+    },
+    "id": {
+      "description": "Stable identifier of the agent, independent of its name. Generated once by the tool that creates the agent; never edited, never reused. Keys the agent's memory across renames.",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{7,127}$"
+    },
+    "scope": {
+      "description": "repository: used only inside this repository. shared: exported when this repository is used as a source by another project.",
+      "enum": [
+        "repository",
+        "shared"
+      ]
+    },
+    "version": {
+      "description": "Descriptive Semantic Versioning 2.0.0 version, shown to people. Readers never decide anything from it: what ran is identified by commit and digest.",
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
+    },
+    "memory": {
+      "$ref": "#/$defs/memory"
+    },
+    "skills": {
+      "description": "Repository-relative paths to skill folders outside the agent's own skills/ folder that this agent uses. The agent's own skills are declared by placement and are not listed.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/relativePath"
+      },
+      "uniqueItems": true
+    },
+    "permissions": {
+      "$ref": "#/$defs/permissions"
+    },
+    "requires": {
+      "$ref": "#/$defs/requires"
+    },
+    "extensions": {
+      "description": "Tool-specific blocks, one per tool namespace. Opaque to the standard except for each block's own version.",
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^[a-z0-9]+([.-][a-z0-9]+)*$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "version"
+        ]
+      }
+    },
+    "name": {
+      "description": "Not part of the manifest. agent.md is the only source of the name; readers warn when it is repeated here and fail when it differs.",
+      "deprecated": true
+    },
+    "description": {
+      "description": "Not part of the manifest. agent.md is the only source of the description.",
+      "deprecated": true
+    }
+  },
+  "$defs": {
+    "slot": {
+      "description": "A name the environment binds to a concrete provider. Never a path, URL or command.",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "why": {
+      "description": "Why the agent needs it. Shown to the person who approves the request.",
+      "type": "string",
+      "minLength": 1
+    },
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "not": {
+        "pattern": "^([/\\\\]|[A-Za-z]:|\\.\\.([/\\\\]|$))"
+      }
+    },
+    "memory": {
+      "description": "Where what the agent learns lives. Defaults: reach project, store local.",
+      "type": "object",
+      "properties": {
+        "reach": {
+          "description": "project: one memory per project. agent: one memory per agent across the projects of one environment (workspace), never across environments.",
+          "enum": [
+            "project",
+            "agent"
+          ],
+          "default": "project"
+        },
+        "store": {
+          "description": "local: the reading tool's own storage. { slot }: an external store the environment binds; a widening request.",
+          "default": "local",
+          "oneOf": [
+            {
+              "const": "local"
+            },
+            {
+              "type": "object",
+              "properties": {
+                "slot": {
+                  "$ref": "#/$defs/slot"
+                }
+              },
+              "required": [
+                "slot"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "permissions": {
+      "description": "Narrowing fields. Intersected with what the launcher has; they can never grant anything.",
+      "type": "object",
+      "properties": {
+        "ceiling": {
+          "description": "The most permissive mode the agent may run in. read-only: no edits and no command execution. ask: each edit or execution needs approval. auto: no ceiling beyond the launcher's.",
+          "enum": [
+            "read-only",
+            "ask",
+            "auto"
+          ]
+        },
+        "tools": {
+          "description": "Allow-list of tool classes. Unknown classes grant nothing.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "requires": {
+      "description": "Widening requests. Never granted from the repository: the person approves them, bound to the source and the digest.",
+      "type": "object",
+      "properties": {
+        "mcp": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "slot": {
+                "$ref": "#/$defs/slot"
+              },
+              "access": {
+                "enum": [
+                  "read",
+                  "write"
+                ]
+              },
+              "why": {
+                "$ref": "#/$defs/why"
+              }
+            },
+            "required": [
+              "slot",
+              "access",
+              "why"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "network": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "host": {
+                "type": "string",
+                "pattern": "^(\\*\\.)?([a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?\\.)*[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$"
+              },
+              "why": {
+                "$ref": "#/$defs/why"
+              }
+            },
+            "required": [
+              "host",
+              "why"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "tools": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "pattern": "^[^/\\\\:~]+$"
+              },
+              "why": {
+                "$ref": "#/$defs/why"
+              }
+            },
+            "required": [
+              "name",
+              "why"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

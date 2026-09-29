@@ -1,0 +1,12 @@
+{
+  "description": "A cited path that does not exist in the repository.",
+  "profile": "authoring",
+  "agents": {
+    "a": {
+      "verdict": "fail",
+      "codes": [
+        "E_PATH_NOT_FOUND"
+      ]
+    }
+  }
+}

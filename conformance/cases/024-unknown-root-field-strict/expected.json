@@ -1,0 +1,15 @@
+{
+  "description": "The same unknown field under --strict fails: publishing is where unknown fields get fixed.",
+  "profile": "format",
+  "args": [
+    "--strict"
+  ],
+  "agents": {
+    "a": {
+      "verdict": "fail",
+      "codes": [
+        "W_UNKNOWN_FIELD"
+      ]
+    }
+  }
+}

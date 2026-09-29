@@ -1,0 +1,10 @@
+{
+  "description": "A read-only ceiling and a tool allow-list. Both narrow and are valid.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "pass",
+      "codes": []
+    }
+  }
+}

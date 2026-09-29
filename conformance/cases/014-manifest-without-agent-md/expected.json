@@ -1,0 +1,12 @@
+{
+  "description": "agent.json alone. The prompt is the agent; a manifest without it describes nothing.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "fail",
+      "codes": [
+        "E_AGENT_MD_MISSING"
+      ]
+    }
+  }
+}

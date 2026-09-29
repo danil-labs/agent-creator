@@ -1,0 +1,12 @@
+{
+  "description": "An agent with only agent.md loads. The manifest is optional; its absence is reported as information, never as an error.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "pass",
+      "codes": [
+        "I_NO_MANIFEST"
+      ]
+    }
+  }
+}

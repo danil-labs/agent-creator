@@ -1,0 +1,10 @@
+{
+  "description": "Everything inside extensions.<tool> is opaque to the standard, including fields that look invalid to it.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "pass",
+      "codes": []
+    }
+  }
+}

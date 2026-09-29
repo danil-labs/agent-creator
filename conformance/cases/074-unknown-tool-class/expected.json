@@ -1,0 +1,12 @@
+{
+  "description": "An unknown tool class in the allow-list. It is ignored, which can only narrow further.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "pass",
+      "codes": [
+        "W_UNKNOWN_TOOL"
+      ]
+    }
+  }
+}

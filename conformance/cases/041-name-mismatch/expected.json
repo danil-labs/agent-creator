@@ -1,0 +1,13 @@
+{
+  "description": "name repeated in the manifest with a different value. A reader that trusted the manifest would bind to another agent.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "fail",
+      "codes": [
+        "E_NAME_MISMATCH",
+        "W_DUPLICATED_FIELD"
+      ]
+    }
+  }
+}

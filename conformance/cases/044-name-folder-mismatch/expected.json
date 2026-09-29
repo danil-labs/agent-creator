@@ -1,0 +1,12 @@
+{
+  "description": "The frontmatter name differs from the folder.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "fail",
+      "codes": [
+        "E_NAME_FOLDER_MISMATCH"
+      ]
+    }
+  }
+}

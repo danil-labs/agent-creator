@@ -1,0 +1,12 @@
+{
+  "description": "A manifest that is valid JSON but not an object.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "fail",
+      "codes": [
+        "E_MANIFEST_NOT_OBJECT"
+      ]
+    }
+  }
+}

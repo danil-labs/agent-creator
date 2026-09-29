@@ -1,0 +1,10 @@
+{
+  "description": "agent.md and agent.json saved with a UTF-8 byte order mark and CRLF line endings, as Windows editors do. Both load.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "pass",
+      "codes": []
+    }
+  }
+}

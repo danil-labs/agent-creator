@@ -1,0 +1,12 @@
+{
+  "description": "A memory slot that also carries a URL. The URL is a location; the slot alone is valid but the manifest is not.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "fail",
+      "codes": [
+        "E_LOCATION_DECLARED"
+      ]
+    }
+  }
+}

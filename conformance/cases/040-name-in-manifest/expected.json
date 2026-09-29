@@ -1,0 +1,12 @@
+{
+  "description": "name repeated in the manifest with the right value. agent.md is the only source of the name, so this is a warning.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "pass",
+      "codes": [
+        "W_DUPLICATED_FIELD"
+      ]
+    }
+  }
+}

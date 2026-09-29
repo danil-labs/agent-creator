@@ -1,0 +1,12 @@
+{
+  "description": "An unknown frontmatter field. Both readers treat it the same way: warn and ignore.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "pass",
+      "codes": [
+        "W_FRONTMATTER_UNKNOWN_FIELD"
+      ]
+    }
+  }
+}

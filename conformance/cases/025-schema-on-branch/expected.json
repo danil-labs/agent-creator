@@ -1,0 +1,12 @@
+{
+  "description": "$schema pointing to a moving branch. It is informative, but an editor validating against main validates against a schema that moves.",
+  "profile": "authoring",
+  "agents": {
+    "a": {
+      "verdict": "pass",
+      "codes": [
+        "W_SCHEMA_NOT_PINNED"
+      ]
+    }
+  }
+}

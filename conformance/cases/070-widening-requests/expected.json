@@ -1,0 +1,15 @@
+{
+  "description": "Every kind of widening request. Each one is reported as requested, not granted: nothing the repository says can grant access.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "pass",
+      "codes": [
+        "I_REQUESTED_NOT_GRANTED",
+        "I_REQUESTED_NOT_GRANTED",
+        "I_REQUESTED_NOT_GRANTED",
+        "I_REQUESTED_NOT_GRANTED"
+      ]
+    }
+  }
+}

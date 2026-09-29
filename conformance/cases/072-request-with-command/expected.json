@@ -1,0 +1,12 @@
+{
+  "description": "An MCP request that carries the command to launch the server. The repository names a slot; the environment decides what runs.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "fail",
+      "codes": [
+        "E_LOCATION_DECLARED"
+      ]
+    }
+  }
+}

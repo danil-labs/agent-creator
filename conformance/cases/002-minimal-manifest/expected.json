@@ -1,0 +1,10 @@
+{
+  "description": "The smallest valid manifest: specVersion and scope.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "pass",
+      "codes": []
+    }
+  }
+}

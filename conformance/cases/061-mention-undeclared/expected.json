@@ -1,0 +1,12 @@
+{
+  "description": "A bare mention of an agent that is not declared.",
+  "profile": "authoring",
+  "agents": {
+    "a": {
+      "verdict": "fail",
+      "codes": [
+        "E_MENTION_UNDECLARED"
+      ]
+    }
+  }
+}

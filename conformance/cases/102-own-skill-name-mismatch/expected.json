@@ -1,0 +1,12 @@
+{
+  "description": "An agent's own skill whose name differs from its folder.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "fail",
+      "codes": [
+        "E_SKILL_NAME_MISMATCH"
+      ]
+    }
+  }
+}

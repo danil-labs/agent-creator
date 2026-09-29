@@ -1,0 +1,12 @@
+{
+  "description": "An unknown field at the root is a warning, not an error: a manifest written for a later minor revision must still load in an older reader.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "pass",
+      "codes": [
+        "W_UNKNOWN_FIELD"
+      ]
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "description": "A tool block written at the root instead of under extensions is just an unknown field.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "pass",
+      "codes": [
+        "W_UNKNOWN_FIELD"
+      ]
+    }
+  }
+}

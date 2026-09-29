@@ -1,0 +1,12 @@
+{
+  "description": "A manifest without scope. Once a manifest exists, scope is required: guessing it would either leak an internal agent or hide a shared one.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "fail",
+      "codes": [
+        "E_SCOPE_MISSING"
+      ]
+    }
+  }
+}

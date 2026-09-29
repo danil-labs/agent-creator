@@ -1,0 +1,12 @@
+{
+  "description": "A memory store written as a path that leaves the tree. The repository never says where memory lives: a manifest could otherwise point it at ~/.ssh.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "fail",
+      "codes": [
+        "E_LOCATION_DECLARED"
+      ]
+    }
+  }
+}

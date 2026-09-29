@@ -1,0 +1,12 @@
+{
+  "description": "A reach outside the enumeration. There is no reach wider than the environment.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "fail",
+      "codes": [
+        "E_MEMORY_REACH_INVALID"
+      ]
+    }
+  }
+}

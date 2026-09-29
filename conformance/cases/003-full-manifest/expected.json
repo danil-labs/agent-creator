@@ -1,0 +1,12 @@
+{
+  "description": "Every field of spec version 1 at once. The widening requests are reported, not granted.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "pass",
+      "codes": [
+        "I_REQUESTED_NOT_GRANTED"
+      ]
+    }
+  }
+}

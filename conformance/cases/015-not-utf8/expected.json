@@ -1,0 +1,12 @@
+{
+  "description": "A manifest in Latin-1. Readers only accept UTF-8, with or without BOM.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "fail",
+      "codes": [
+        "E_ENCODING"
+      ]
+    }
+  }
+}

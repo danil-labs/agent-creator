@@ -1,0 +1,14 @@
+{
+  "description": "A bare mention of a declared agent, and an e-mail address that is not a mention.",
+  "profile": "authoring",
+  "agents": {
+    "a": {
+      "verdict": "pass",
+      "codes": []
+    },
+    "b": {
+      "verdict": "pass",
+      "codes": []
+    }
+  }
+}

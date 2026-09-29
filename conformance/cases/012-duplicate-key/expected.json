@@ -1,0 +1,12 @@
+{
+  "description": "A key repeated in the manifest. JSON parsers disagree on which value wins, so two readers would see two different agents.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "fail",
+      "codes": [
+        "E_MANIFEST_DUPLICATE_KEY"
+      ]
+    }
+  }
+}

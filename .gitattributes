@@ -1,2 +1,6 @@
 * text=auto eol=lf
 *.py text eol=lf
+
+# Conformance fixtures that test encodings and line endings are stored byte for byte.
+conformance/cases/011-bom-crlf/** -text
+conformance/cases/015-not-utf8/** -text

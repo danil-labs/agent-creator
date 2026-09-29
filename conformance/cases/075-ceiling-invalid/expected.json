@@ -1,0 +1,12 @@
+{
+  "description": "A ceiling outside the enumeration.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "fail",
+      "codes": [
+        "E_PERMISSION_CEILING_INVALID"
+      ]
+    }
+  }
+}

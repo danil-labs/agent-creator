@@ -1,0 +1,32 @@
+{
+  "$schema": "https://raw.githubusercontent.com/danil-labs/agent-creator/v1/schema/agent.v1.json",
+  "specVersion": 1,
+  "scope": "shared",
+  "memory": {
+    "reach": "agent",
+    "store": {
+      "slot": "team-memory"
+    }
+  },
+  "requires": {
+    "mcp": [
+      {
+        "slot": "issue-tracker",
+        "access": "read",
+        "why": "Reads the issues linked from a story"
+      }
+    ],
+    "network": [
+      {
+        "host": "registry.npmjs.org",
+        "why": "Checks the latest version of a package"
+      }
+    ],
+    "tools": [
+      {
+        "name": "gh",
+        "why": "Opens the pull request with the result"
+      }
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "description": "specVersion written as the string \"1.0\". It is an integer: strings invite comparing \"1.10\" with \"1.9\" as text.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "fail",
+      "codes": [
+        "E_SPEC_VERSION_INVALID"
+      ]
+    }
+  }
+}

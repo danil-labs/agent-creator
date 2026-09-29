@@ -1,0 +1,12 @@
+{
+  "description": "An extension block without its own version.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "pass",
+      "codes": [
+        "W_EXTENSION_VERSION_MISSING"
+      ]
+    }
+  }
+}

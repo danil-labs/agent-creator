@@ -1,0 +1,12 @@
+{
+  "description": "tools in the frontmatter binds the agent to one CLI. Accepted with a warning for compatibility with Claude Code subagents.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "pass",
+      "codes": [
+        "W_FRONTMATTER_CLI_FIELD"
+      ]
+    }
+  }
+}

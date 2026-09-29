@@ -1,0 +1,12 @@
+{
+  "description": "A store that is neither \"local\" nor a slot object.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "fail",
+      "codes": [
+        "E_MEMORY_STORE_INVALID"
+      ]
+    }
+  }
+}

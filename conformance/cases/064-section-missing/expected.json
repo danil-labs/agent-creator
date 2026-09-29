@@ -1,0 +1,12 @@
+{
+  "description": "A body without the \u00abWhat you have learned\u00bb section.",
+  "profile": "authoring",
+  "agents": {
+    "a": {
+      "verdict": "pass",
+      "codes": [
+        "W_SECTION_MISSING"
+      ]
+    }
+  }
+}

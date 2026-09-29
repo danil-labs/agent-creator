@@ -1,0 +1,10 @@
+{
+  "description": "A mention inside code is code. `@theme` between backticks and @media in a fenced block are CSS, not handoffs.",
+  "profile": "authoring",
+  "agents": {
+    "a": {
+      "verdict": "pass",
+      "codes": []
+    }
+  }
+}

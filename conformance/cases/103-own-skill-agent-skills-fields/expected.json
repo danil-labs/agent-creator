@@ -1,0 +1,10 @@
+{
+  "description": "An agent's own skill with the optional Agent Skills fields and folders. They belong to that spec and are not checked here.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "pass",
+      "codes": []
+    }
+  }
+}

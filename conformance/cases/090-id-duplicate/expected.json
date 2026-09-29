@@ -1,0 +1,18 @@
+{
+  "description": "Two agents with the same id, as happens when a folder is copied to start a new agent. Both fail: their memories would merge.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "fail",
+      "codes": [
+        "E_ID_DUPLICATE"
+      ]
+    },
+    "b": {
+      "verdict": "fail",
+      "codes": [
+        "E_ID_DUPLICATE"
+      ]
+    }
+  }
+}
