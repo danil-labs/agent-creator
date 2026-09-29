@@ -1,0 +1,9 @@
+{
+  "$schema": "https://raw.githubusercontent.com/danil-labs/agent-creator/v1/schema/agent.v1.json",
+  "specVersion": 1,
+  "id": "2d225069-ba22-4d4e-81d8-47968630d3e4",
+  "scope": "shared",
+  "version": "1.0.0",
+  "memory": { "reach": "agent", "store": "local" },
+  "permissions": { "ceiling": "ask", "tools": ["read", "edit", "execute"] }
+}
