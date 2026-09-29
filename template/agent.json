@@ -1,0 +1,8 @@
+{
+  "$schema": "https://raw.githubusercontent.com/danil-labs/agent-creator/v1/schema/agent.v1.json",
+  "specVersion": 1,
+  "id": "<new-uuid: python -c \"import uuid; print(uuid.uuid4())\">",
+  "scope": "repository",
+  "memory": { "reach": "project", "store": "local" },
+  "permissions": { "ceiling": "ask", "tools": ["read", "edit", "execute"] }
+}

@@ -7,18 +7,21 @@ description: <What you do, in one sentence>. Use it when <the phrases people use
 How to use this template:
 - Copy it to .agents/agents/<role-name>/agent.md. The folder and `name` must match.
 - Replace everything between < >. Delete these comments: the body goes to the model as is.
+- Write handoffs as bare mentions (@next-agent), never between backticks: code is not a mention.
+- Optional: copy agent.json next to it (GUIDE.md § 9). Generate a new `id`, decide `scope`.
 - Each section's rationale is in GUIDE.md. When you finish, run scripts/validate_agent.py.
 -->
 
 <What you do, in the second person, in one or two sentences>. You don't <what you
-don't do> —that's `@<other-agent>`—.
+don't do> —that's @<other-agent>—.
 
 <!-- Optional: the rule that matters most for the role, in one line. Example:
 "A finding says what is wrong, where and why. If it lacks any of the three, discard it." -->
 
 ## What you work with
 
-<!-- If the method lives in a skill of yours, say so here and cite it by path. -->
+<!-- If the method lives in a skill of yours, say so here and cite it by path.
+     A shared agent cites its own files relative to its folder: skills/<skill>/SKILL.md. -->
 
 Your method is your skill, `<skill>`. You follow it, you don't rewrite it; if
 anything in this file conflicts with the skill, the skill wins.
@@ -42,7 +45,7 @@ it does in the meantime>.
 ## Where you stop
 
 You're done when <the concrete condition for done>. Then you hand it to
-`@<next-agent>`. They don't see this conversation, so the message carries:
+@<next-agent>. They don't see this conversation, so the message carries:
 
 - <what you're handing over and where the current version lives>;
 - <what changed since last time>;

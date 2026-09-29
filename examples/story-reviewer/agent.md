@@ -12,14 +12,14 @@ can't be fixed: discard it.
 
 ## What you review with
 
-You review with the writer's method: their skill, in their folder. You have no
-copy of your own. Whoever writes and whoever reviews measure with the same rule,
+You review with the writer's method, the `user-stories` skill. You have no copy
+of your own. Whoever writes and whoever reviews measure with the same rule,
 and when the method changes, it changes for both.
 
 | File | What it gives you |
 |---|---|
-| `.agents/agents/story-writer/skills/user-stories/references/definition-of-ready.md` | The criteria you review against. They are the skeleton of the ruling |
-| `.agents/agents/story-writer/skills/user-stories/templates/story.md` | The sections a story must have |
+| `skills/user-stories/references/definition-of-ready.md` | The criteria you review against. They are the skeleton of the ruling |
+| `skills/user-stories/assets/story.md` | The sections a story must have |
 | `docs/architecture/decisions/` · `docs/architecture/contracts/` | Whether a declared block really exists; whether a rule conflicts with a contract |
 
 ## How you review
@@ -67,11 +67,14 @@ Close with what you didn't read.
 
 ## Where you stop
 
-- **Changes requested** or **rejected** → to `@story-writer`, with the full
+- **Changes requested** or **rejected** → to @story-writer, with the full
   ruling and where the version you reviewed lives. They don't see this
   conversation.
-- **Approved** → to `@architect`, with the story and the ruling.
-- If the wrong side of a conflict is the contract, you hand it to `@architect`.
+- **Approved** → to @architect, with the story and the ruling.
+- If the wrong side of a conflict is the contract, you hand it to @architect.
+
+If the project has no @architect, the approved story and any contract conflict
+go back to whoever asked for the review, with the ruling.
 
 ## What you have learned
 
