@@ -1,0 +1,49 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: ${{ matrix.os }} · Python ${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ['3.9', '3.13']
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Examples
+        run: python scripts/validate_agent.py --agents examples --no-paths
+
+      - name: This repository's agents (strict)
+        run: python scripts/validate_agent.py --root . --strict
+
+      - name: Conformance corpus
+        run: python scripts/run_conformance.py
+
+      - name: Byte-exact fixtures survived checkout
+        shell: python
+        run: |
+          raw = open('conformance/cases/011-bom-crlf/input/.agents/agents/a/agent.json', 'rb').read()
+          assert raw.startswith(b'\xef\xbb\xbf') and b'\r\n' in raw, 'the BOM/CRLF fixture was normalized on checkout'
+
+      - name: Schema is valid JSON
+        shell: python
+        run: |
+          import json
+          schema = json.load(open('schema/agent.v1.json', encoding='utf-8'))
+          assert schema['$schema'] == 'https://json-schema.org/draft/2020-12/schema'
+          assert schema['$id'].endswith('/v1/schema/agent.v1.json')

@@ -1,0 +1,64 @@
+name: Propose a field or a rule
+description: Propose a new manifest field, value or rule for the Agent Declaration Format.
+title: "[proposal] "
+labels: [proposal]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A proposal needs a problem that shows today, the behavior a reader changes, and a conformance case that proves it.
+        See [CONTRIBUTING.md](https://github.com/danil-labs/agent-creator/blob/main/CONTRIBUTING.md#proposing-a-field-or-a-rule). Please describe structures, not client data.
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What goes wrong today without this, for whom, and how it shows. A real repository or harness, not a hypothetical one.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: The field or rule
+      description: Name, type, where it lives, whether it is optional, and an example.
+      render: json
+    validations:
+      required: true
+  - type: dropdown
+    id: class
+    attributes:
+      label: Class of field (SPEC § 8)
+      options:
+        - Descriptive — shown and used to identify, grants nothing
+        - Narrowing — intersected with the launcher's permissions
+        - Widening — a request a person approves, never granted from the repository
+        - Not a field — a rule about files or readers
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: The behavior that changes
+      description: What a reader does when the field is present, when it is absent, and what an older reader does when it meets it.
+    validations:
+      required: true
+  - type: textarea
+    id: conformance
+    attributes:
+      label: The conformance case
+      description: The input tree and the expected verdict and codes. It must fail without the change.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Including doing nothing, or using an extension block (extensions.<tool>) instead.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: The proposal is additive within specVersion 1, or it explains why it needs a new major version.
+          required: true
+        - label: It contains no client data.
+          required: true
