@@ -1,7 +1,6 @@
 ---
 name: audit-docs
 description: Audits documentation against the code it describes —dead paths, commands that don't run, rules nothing enforces— and classifies each finding so the verdict follows from rules. Use it to review AGENTS.md, READMEs, architecture notes, decision records or agent declarations before agents rely on them.
-license: Apache-2.0
 allowed-tools: Read Grep Glob Bash
 ---
 

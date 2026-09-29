@@ -1,7 +1,6 @@
 ---
 name: measure-repository
 description: Measures a repository before documenting it for agents —layout, languages, the commands that build, test and lint it and whether they run, the rules the code and CI enforce, and the decisions already taken— and records each measurement so the document can cite it. Use it before writing or updating AGENTS.md, an architecture overview or decision records, and whenever a document must state a command, a path or a rule.
-license: Apache-2.0
 ---
 
 # measure-repository

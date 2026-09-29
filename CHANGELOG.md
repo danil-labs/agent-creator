@@ -32,8 +32,7 @@ The first versioned release of the format: `specVersion: 1`.
   `docs-auditor`, with their skills.
 - `GUIDE.md` sections on the manifest, limits and requests, shared agents and
   memory.
-- `LICENSE` (Apache-2.0), `CONTRIBUTING.md`, `AGENTS.md`, CI and a field
-  proposal form.
+- `CONTRIBUTING.md`, `AGENTS.md`, CI and a field proposal form.
 
 ### Changed
 

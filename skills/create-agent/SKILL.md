@@ -1,7 +1,6 @@
 ---
 name: create-agent
 description: Guide to create or fix an agent declared in a repository (.agents/agents/<name>/agent.md and its optional agent.json), end to end: whether it should be an agent or a skill, its boundary, the name and description, the body, the handoffs, the report, what it learns, the manifest (scope, id, memory, limits and requests), validation, and a test with a real case. Use it when asked to create, write, review or fix an agent, a subagent or a role; to turn a prompt that keeps being repeated into an agent; to prepare an agent for use in other repositories; or to assemble a team of agents that do not step on each other.
-license: Apache-2.0
 ---
 
 # create-agent

@@ -1,7 +1,6 @@
 # Agent Declaration Format
 
 [![Validate](https://github.com/danil-labs/agent-creator/actions/workflows/validate.yml/badge.svg)](https://github.com/danil-labs/agent-creator/actions/workflows/validate.yml)
-[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 [![Spec: v1](https://img.shields.io/badge/spec-v1-informational.svg)](SPEC.md)
 [![Conformance: 48 cases](https://img.shields.io/badge/conformance-48%20cases-success.svg)](conformance/)
 
@@ -171,4 +170,4 @@ each one says why it exists ([GUIDE § 15](GUIDE.md#15-why-each-rule-exists)).
 
 ## License
 
-[Apache License 2.0](LICENSE).
+No license has been chosen yet.

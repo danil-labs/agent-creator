@@ -87,5 +87,5 @@ point to `v1`.
 
 ## License
 
-By contributing, you agree that your contribution is licensed under the
-[Apache License 2.0](LICENSE).
+This repository does not have a license yet. Until one is chosen, open an
+issue before sending a pull request.
