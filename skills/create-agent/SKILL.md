@@ -7,8 +7,16 @@ description: Guide to create, review or fix an agent declared in a repository (.
 
 Takes an agent from the idea to a validated and tested declaration: an
 `agent.md` and, when it needs one, an `agent.json`. The format is in `SPEC.md`
-and the reason behind each rule is in `GUIDE.md`, at the root of the
-agent-creator repository. This skill gives the order.
+and the reason behind each rule is in `GUIDE.md`, both next to this file. This
+skill gives the order.
+
+Every path this skill names —`SPEC.md`, `GUIDE.md`, `template/` and
+`scripts/`— is relative to `<skill folder>`, the folder that holds this
+`SKILL.md`; the skill is delivered with those files beside it. If they are not
+there, you are reading the skill inside the agent-creator repository itself,
+where it lives in `skills/create-agent/`: the same files are two folders up, so
+use `<skill folder>/../..` instead. Do not look for the agent-creator
+repository anywhere else.
 
 ## Inputs
 
@@ -23,7 +31,7 @@ is designed for the imagined case.
 
 ## Steps
 
-1. **Decide whether it is an agent.** Use the table in `GUIDE.md` § 1. If what is
+1. **Decide whether it is an agent.** Use the table in `<skill folder>/GUIDE.md` § 1. If what is
    missing is a method, it is a skill; if it is a rule for everyone, it is a line
    in `AGENTS.md`. Say so and stop if it is not an agent.
 2. **Draw the boundary.** Write first what it does not do and whose job that is.
@@ -38,7 +46,7 @@ is designed for the imagined case.
    goes in the repository's skills folder and each agent lists it in its
    manifest's `skills`. Before moving an existing skill inside an agent, find out
    who else uses it.
-5. **The body**, from `template/agent.md`:
+5. **The body**, from `<skill folder>/template/agent.md`:
    - the role in one or two sentences, with what it is not;
    - «What you work with», with real paths and what does not exist;
    - «How you work», with steps and criteria;
@@ -47,8 +55,8 @@ is designed for the imagined case.
    - «What you report», with the exact shape, and the verdict derived from rules
      if it rules on something;
    - «What you have learned», with real lessons or empty, and the memory rule.
-6. **The manifest**, from `template/agent.json`, when the agent needs any of
-   what `GUIDE.md` § 9 lists. Decide each field on purpose:
+6. **The manifest**, from `<skill folder>/template/agent.json`, when the agent
+   needs any of what `GUIDE.md` § 9 lists. Decide each field on purpose:
    - `scope`: `shared` if the job holds in any project, `repository` otherwise.
      Required once the file exists.
    - `id`: generate a new one, never copy it —
@@ -70,7 +78,7 @@ is designed for the imagined case.
    fixed, shared or not:
 
    ```bash
-   python scripts/validate_agent.py --root <repository> --strict
+   python <skill folder>/scripts/validate_agent.py --root <repository> --strict
    ```
 
    Strict mode counts every warning as an error, so fix every error and every
@@ -95,8 +103,8 @@ is designed for the imagined case.
 - One line per boundary and manifest decision you made —scope, memory reach,
   limits, requests— so the person can confirm it.
 
-**It is done when** `scripts/validate_agent.py --strict` reports no error and
-no warning for the agent, whatever its `scope`; the real case stayed inside the
+**It is done when** `<skill folder>/scripts/validate_agent.py --strict` reports
+no error and no warning for the agent, whatever its `scope`; the real case stayed inside the
 boundary; and no other agent writes where this one writes. Until the strict run
 passes, the agent is not done, even if everything else is.
 

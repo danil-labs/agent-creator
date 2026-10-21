@@ -15,6 +15,10 @@ the validator follows [Semantic Versioning](https://semver.org).
 - `agent-designer` 1.1.0 follows the same rule, and `GUIDE.md` § 13 and its
   checklist ask for `--strict` before calling any agent done. The format and
   `SPEC.md` § 9.3 do not change.
+- The `create-agent` skill names `SPEC.md`, `GUIDE.md`, `template/` and
+  `scripts/validate_agent.py` relative to its own folder, where they are
+  delivered next to `SKILL.md`, with `../..` as the fallback inside this
+  repository. An agent no longer has to find the agent-creator repository.
 
 ## [1.0.0] — Unreleased
 
