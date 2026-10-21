@@ -4,6 +4,22 @@ All notable changes to the Agent Declaration Format and its tools. The format
 follows the versioning rules in [`SPEC.md` § 9](SPEC.md#9-versioning-and-compatibility);
 the validator follows [Semantic Versioning](https://semver.org).
 
+## [Unreleased]
+
+### Changed
+
+- The `create-agent` skill closes only when the validator passes with
+  `--strict`, for every agent it creates, reviews or fixes, shared or not.
+  Before, strict mode was required only for shared agents, and a warning could
+  be justified instead of fixed.
+- `agent-designer` 1.1.0 follows the same rule, and `GUIDE.md` § 13 and its
+  checklist ask for `--strict` before calling any agent done. The format and
+  `SPEC.md` § 9.3 do not change.
+- The `create-agent` skill names `SPEC.md`, `GUIDE.md`, `template/` and
+  `scripts/validate_agent.py` relative to its own folder, where they are
+  delivered next to `SKILL.md`, with `../..` as the fallback inside this
+  repository. An agent no longer has to find the agent-creator repository.
+
 ## [1.0.0] — Unreleased
 
 The first versioned release of the format: `specVersion: 1`.
