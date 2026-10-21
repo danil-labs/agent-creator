@@ -348,8 +348,13 @@ memory), secrets, and anything that is really a change to the method.
 
    ```bash
    python scripts/validate_agent.py --root <your-repository>
-   python scripts/validate_agent.py --root <your-repository> --strict   # before publishing
+   python scripts/validate_agent.py --root <your-repository> --strict   # before calling it done
    ```
+
+   An agent is done when it passes `--strict`, shared or not. Every warning
+   in version 1 is a field the author can remove, and an agent kept in
+   `repository` scope today is published the day it becomes `shared`
+   (§ 11). The `create-agent` skill closes only on the strict run.
 
 2. **Give it a real case**, not one made up so it comes out right. For a
    reviewer: a package a person has already reviewed, and compare findings.
@@ -416,6 +421,6 @@ format.
 - [ ] «What you have learned» has only real lessons, and the memory rule.
 - [ ] If it has a manifest: `scope` is decided on purpose, the `id` is new, and there are no locations or secrets.
 - [ ] Limits are declared wherever the role allows them; every request has a `why`.
-- [ ] If it is shared: its files travel with it, cited relative to its folder, and it passes `--strict`.
-- [ ] The validator passes.
+- [ ] If it is shared: its files travel with it, cited relative to its folder.
+- [ ] The validator passes with `--strict`.
 - [ ] It was tested with a real case.

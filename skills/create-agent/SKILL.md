@@ -1,6 +1,6 @@
 ---
 name: create-agent
-description: Guide to create or fix an agent declared in a repository (.agents/agents/<name>/agent.md and its optional agent.json), end to end: whether it should be an agent or a skill, its boundary, the name and description, the body, the handoffs, the report, what it learns, the manifest (scope, id, memory, limits and requests), validation, and a test with a real case. Use it when asked to create, write, review or fix an agent, a subagent or a role; to turn a prompt that keeps being repeated into an agent; to prepare an agent for use in other repositories; or to assemble a team of agents that do not step on each other.
+description: Guide to create, review or fix an agent declared in a repository (.agents/agents/<name>/agent.md and its optional agent.json), end to end: whether it should be an agent or a skill, its boundary, the name and description, the body, the handoffs, the report, what it learns, the manifest (scope, id, memory, limits and requests), validation in strict mode, and a test with a real case. Use it when asked to create, write, review, fix or update an agent, a subagent or a role; to turn a prompt that keeps being repeated into an agent; to prepare an agent for use in other repositories; or to assemble a team of agents that do not step on each other.
 ---
 
 # create-agent
@@ -66,15 +66,20 @@ is designed for the imagined case.
 7. **The other agents.** If the new one receives or hands off work, update the
    `agent.md` on the other side of the handoff, and the agents table in the
    repository's `AGENTS.md`.
-8. **Validate:**
+8. **Validate in strict mode**, for every agent you created, reviewed or
+   fixed, shared or not:
 
    ```bash
-   python scripts/validate_agent.py --root <repository>
-   python scripts/validate_agent.py --root <repository> --strict   # shared agents, before publishing
+   python scripts/validate_agent.py --root <repository> --strict
    ```
 
-   Fix every error. Each warning is either fixed or justified in your report.
-   Codes are listed in `SPEC.md` § 13.
+   Strict mode counts every warning as an error, so fix every error and every
+   warning; none is left to justify. Every warning in version 1 is a field that
+   does not belong where it is, and the author can always remove it. A warning
+   that passes today is a field the next reader drops, or one the agent
+   publishes the day its `scope` becomes `shared` (`SPEC.md` § 9.3). Codes are
+   listed in `SPEC.md` § 13. If another agent in the repository fails and you
+   were not asked to touch it, name it in your report instead of fixing it.
 9. **Test with the real case.** Check three things: whether it stayed inside its
    boundary, whether the handoff carried what was needed, and whether the report
    had the declared shape. Whatever fails goes to the agent, or to the skill if it
@@ -82,16 +87,18 @@ is designed for the imagined case.
 
 ## Output
 
-- `.agents/agents/<name>/agent.md`, validated, and `agent.json` if it needed one.
+- `.agents/agents/<name>/agent.md`, validated in strict mode, and `agent.json` if
+  it needed one.
 - The new or moved skills, if they were needed.
 - The `agent.md` files on the other side of each handoff, updated.
-- The validator's output.
+- The output of the validator in strict mode.
 - One line per boundary and manifest decision you made —scope, memory reach,
   limits, requests— so the person can confirm it.
 
-**It is done when** the validator passes (in strict mode for shared agents), the
-real case stayed inside the boundary, and no other agent writes where this one
-writes.
+**It is done when** `scripts/validate_agent.py --strict` reports no error and
+no warning for the agent, whatever its `scope`; the real case stayed inside the
+boundary; and no other agent writes where this one writes. Until the strict run
+passes, the agent is not done, even if everything else is.
 
 ## What not to do
 
@@ -104,5 +111,7 @@ writes.
 - **Do not copy an `id`.** Two agents with one `id` share one memory.
 - **Do not put locations or secrets in the manifest.** The environment binds
   slots.
+- **Do not call an agent done on the default mode.** Reading mode lets warnings
+  through; the skill closes only on `--strict`.
 - **Do not give it a personality or motivational text.** They do not change any
   decision.

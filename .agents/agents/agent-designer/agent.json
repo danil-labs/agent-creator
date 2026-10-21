@@ -3,7 +3,7 @@
   "specVersion": 1,
   "id": "6593c913-2cd4-49a9-a428-4b120943a692",
   "scope": "shared",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "memory": { "reach": "agent", "store": "local" },
   "skills": ["skills/create-agent"],
   "permissions": { "ceiling": "ask", "tools": ["read", "edit", "execute"] }
