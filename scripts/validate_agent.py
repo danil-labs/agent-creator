@@ -36,7 +36,7 @@ PROMPT_FIELDS = {'name', 'description'}
 SCOPES = {'repository', 'shared'}
 REACHES = {'project', 'agent'}
 CEILINGS = {'read-only', 'ask', 'auto'}
-TOOLS = {'read', 'edit', 'execute', 'web', 'delegate'}
+TOOLS = {'read', 'edit', 'execute', 'web', 'delegate', 'mcp'}
 ACCESS = {'read', 'write'}
 LOCATION_KEYS = {'path', 'dir', 'directory', 'file', 'url', 'uri', 'endpoint', 'host', 'server',
                  'command', 'cmd', 'args', 'env', 'token', 'key', 'secret', 'password', 'credentials'}

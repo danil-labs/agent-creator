@@ -3,7 +3,7 @@
   "specVersion": 1,
   "id": "4a2f8f1e-a749-4565-83cd-5d0a2406b959",
   "scope": "shared",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "memory": {
     "reach": "agent",
     "store": "local"
@@ -14,7 +14,8 @@
   "permissions": {
     "ceiling": "read-only",
     "tools": [
-      "read"
+      "read",
+      "mcp"
     ]
   },
   "requires": {
