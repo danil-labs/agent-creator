@@ -6,7 +6,23 @@ the validator follows [Semantic Versioning](https://semver.org).
 
 ## [Unreleased]
 
+### Added
+
+- `mcp`, a tool class in `permissions.tools` for the tools of MCP servers
+  (`SPEC.md` § 7.10). With `tools` present and without `mcp`, no MCP tool is
+  exposed, not even an approved `requires.mcp` server's; under `read-only`,
+  only servers approved with `access: "read"`; under `ask`, every call needs
+  approval. An older reader ignores the class with `W_UNKNOWN_TOOL`, which only
+  removes tools. Conformance case `076-tool-class-mcp`.
+- `SPEC.md` § 10.6: the memory of an agent that cannot edit. It still reads
+  its memory, never writes it by editing files, and may use a memory tool its
+  harness offers. H9 says so.
+
 ### Changed
+
+- The `story-reviewer` example 1.1.0 lists `mcp` in `permissions.tools`, so
+  the issue tracker it requests can be used once approved. Appendix A of
+  `SPEC.md` does the same.
 
 - The `create-agent` skill closes only when the validator passes with
   `--strict`, for every agent it creates, reviews or fixes, shared or not.

@@ -266,7 +266,10 @@ whoever wrote it. So the format splits fields by what they can do
 - **Limits narrow, and they always apply.** `permissions.ceiling` and
   `permissions.tools` can only take capabilities away. Declare them wherever
   the role allows it: a reviewer is `read-only` with `["read"]`; an agent that
-  runs checks but must not edit has `["read", "execute"]`. A harness intersects
+  runs checks but must not edit has `["read", "execute"]`. Add `mcp` only
+  when the role uses an MCP server it requests in `requires.mcp`: without the
+  class, the server's tools stay out even after the person approves it. A
+  harness intersects
   them with the launcher's permissions, so a limit never hurts a launcher that
   already has less.
 - **Requests widen, and they never apply by themselves.** `requires` and an
@@ -337,6 +340,13 @@ The manifest decides where the agent memory lives:
   service. If the slot is missing or down, the agent runs without memory and
   says so. It never falls back to local memory, because that would split one
   memory into two halves.
+
+A **read-only agent still has memory**: it reads it in every run, but it
+cannot write it by editing files ([SPEC § 10.6](SPEC.md#106-memory-when-the-agent-cannot-edit)).
+If such an agent must learn, it relies on a memory tool its harness offers, or
+it reports the lesson for the person to record. Write its «What you have
+learned» accordingly: "report a heuristic you would keep; don't write files to
+remember it".
 
 What never goes into agent memory: client facts (they belong to the project
 memory), secrets, and anything that is really a change to the method.

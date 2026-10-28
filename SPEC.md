@@ -455,15 +455,31 @@ remove capabilities.
 | Key | Type | Values |
 |---|---|---|
 | `ceiling` | string | `"read-only"`: no file edits and no command execution. `"ask"`: every edit and every execution needs approval. `"auto"`: no ceiling beyond the launcher's (`E_PERMISSION_CEILING_INVALID`) |
-| `tools` | array of strings | An allow-list of tool classes: `read` (read and search files), `edit` (create and modify files), `execute` (run commands), `web` (fetch and search the web), `delegate` (start other agents) |
+| `tools` | array of strings | An allow-list of tool classes: `read` (read and search files), `edit` (create and modify files), `execute` (run commands), `web` (fetch and search the web), `delegate` (start other agents), `mcp` (call the tools of MCP servers) |
 
 - An unknown tool class **MUST** be ignored, with a warning (`W_UNKNOWN_TOOL`).
   *Why:* in an allow-list, ignoring a value can only remove capabilities, so a
   manifest written for a later minor revision stays safe in an older reader.
 - A harness maps these classes to the tools of the CLI it drives.
+- Every tool of an MCP server belongs to the `mcp` class, whatever the tool
+  does. When `tools` is present without `mcp`, a harness **MUST NOT** expose
+  any MCP tool to the agent, including the tools of a server approved through
+  `requires.mcp` (§ 7.11): the request stays requested and unusable. *Why:* an
+  MCP server is another program, and its tools can read, write or run anything
+  that program can. Without a class of its own, an allow-list such as
+  `["read"]` would not say whether those tools are in or out, and each harness
+  would decide differently.
+- `ceiling` applies to MCP tools as well. Under `read-only`, a harness **MUST**
+  expose only the tools of servers the person approved with `access: "read"`.
+  Under `ask`, every MCP tool call needs approval. *Why:* a ceiling that
+  stopped at the CLI's own tools would leave a way to write through any
+  server.
+- `mcp` is an addition within version 1 (§ 9.1). A reader that predates it
+  ignores the class with `W_UNKNOWN_TOOL`. That can only remove MCP tools, so
+  the manifest stays safe in an older reader (§ 9.2).
 
 ```json
-"permissions": { "ceiling": "read-only", "tools": ["read"] }
+"permissions": { "ceiling": "read-only", "tools": ["read", "mcp"] }
 ```
 
 ### 7.11 `requires`
@@ -667,6 +683,28 @@ The reference validator reports it in `--json` output.
   into two stores that each hold half of what the agent learned, and nothing
   shows it.
 
+### 10.6 Memory when the agent cannot edit
+
+An agent is asked to record what it learns (§ 4, «What you have learned»).
+Some agents run without the `edit` class: under `ceiling: "read-only"`, with
+`permissions.tools` that lacks `edit`, or because the launcher has no edit.
+For such a run:
+
+- A harness **MUST** still give the agent its memory to read, as in any other
+  run. *Why:* a read-only reviewer is the agent whose heuristics matter most,
+  and it would otherwise start every run from nothing.
+- A harness **MUST NOT** let the agent write its memory by editing files: the
+  memory folder is not editable in that run, whatever its location. *Why:* a
+  memory folder that stays editable is a writable folder on the person's
+  machine, which is exactly what the ceiling forbids.
+- A harness **SHOULD** tell the agent, in the run, that its memory is
+  read-only.
+- A harness **MAY** offer a memory tool of its own that writes only entries
+  of that agent's memory. Such a tool is the harness's, not a file edit, and
+  the `edit` class does not govern it. The person decides whether it is
+  offered. *Why:* learning is still possible without opening a write path to
+  arbitrary files.
+
 What belongs in each kind of memory, and what never goes in either, is in
 [GUIDE § 12](GUIDE.md#12-designing-memory).
 
@@ -716,7 +754,7 @@ A harness that claims conformance to this specification **MUST**:
 | H6 | Show every agent that fails to load, with its diagnostic code. Never drop one silently | § 11.2 |
 | H7 | Never grant a widening field from the repository; store approval outside it, bound to source and digest; ask again when the digest changes | § 8 |
 | H8 | Intersect narrowing fields with the launcher's permissions, and refuse or warn when it cannot enforce one | § 8 |
-| H9 | Key memory by identity; never share it across environments; when external memory fails, run without memory and say so | § 10 |
+| H9 | Key memory by identity; never share it across environments; when external memory fails, run without memory and say so; without `edit`, give the agent its memory to read and never let it write it by editing files | § 10 |
 | H10 | Export only `shared` agents from a source; resolve collisions deterministically and show them | § 11 |
 | H11 | Not write into the repository while reading it: no generated `id`, no lock file, no rewritten manifest | § 7.6 |
 | H12 | Record source identity, commit and digest with each run | § 10.2 |
@@ -856,7 +894,7 @@ a published major version cannot be undone.
   "scope": "shared",
   "version": "1.2.0",
   "memory": { "reach": "agent", "store": "local" },
-  "permissions": { "ceiling": "read-only", "tools": ["read"] },
+  "permissions": { "ceiling": "read-only", "tools": ["read", "mcp"] },
   "requires": {
     "mcp": [{ "slot": "issue-tracker", "access": "read", "why": "Reads the issues linked from the stories under review" }]
   },
@@ -867,9 +905,11 @@ a published major version cannot be undone.
 What a conforming harness does with it, in a consumer project: offers the
 agent, because it is `shared`; runs it read-only whatever the launcher has,
 with only the read tools; keeps one memory for it across the projects of the
-environment, keyed by its source and `id`; shows the MCP request as requested,
-not granted, until the person approves it for this source and this digest;
-and passes `extensions.terminus` to Terminus only.
+environment, keyed by its source and `id`, which it reads and cannot edit
+(§ 10.6); shows the MCP request as requested, not granted, until the person
+approves it for this source and this digest, and then exposes that read-only
+server's tools through the `mcp` class; and passes `extensions.terminus` to
+Terminus only.
 
 ## Appendix B: extension namespaces
 

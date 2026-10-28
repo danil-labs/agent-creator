@@ -148,7 +148,7 @@
           ]
         },
         "tools": {
-          "description": "Allow-list of tool classes. Unknown classes grant nothing.",
+          "description": "Allow-list of tool classes: read, edit, execute, web, delegate, mcp. Unknown classes grant nothing.",
           "type": "array",
           "items": {
             "type": "string"

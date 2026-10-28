@@ -1,0 +1,12 @@
+{
+  "description": "The mcp tool class of version 1. It is known, so it loads without W_UNKNOWN_TOOL; the MCP request is reported as requested, not granted.",
+  "profile": "format",
+  "agents": {
+    "a": {
+      "verdict": "pass",
+      "codes": [
+        "I_REQUESTED_NOT_GRANTED"
+      ]
+    }
+  }
+}
